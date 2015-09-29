@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentManager;
  */
 public abstract class SingleFragmentActivity extends FragmentActivity {
 
-    protected abstract Fragment creareFragment();
+    protected abstract Fragment createFragment();
 
     @Override
     public void onCreate(Bundle savedinstanceState){
@@ -22,7 +22,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
         if (fragment == null) {
-            fragment = creareFragment();
+            fragment = createFragment();
             fm.beginTransaction().add(R.id.fragment_container,fragment).commit();
         }
     }

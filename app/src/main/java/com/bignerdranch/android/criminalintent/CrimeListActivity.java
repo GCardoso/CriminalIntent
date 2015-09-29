@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
  */
 public class CrimeListActivity extends SingleFragmentActivity{
     @Override
-    protected Fragment creareFragment() {
+    protected Fragment createFragment() {
         return new CrimeListFragment();
     }
 }
