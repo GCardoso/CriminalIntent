@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -31,7 +32,9 @@ public class CrimeListFragment extends Fragment {
             mCrime = crime;
 
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+
+            android.text.format.DateFormat dateFormater = new android.text.format.DateFormat();
+            mDateTextView.setText(dateFormater.format("EEEE, MMM dd, yyyy ", mCrime.getDate()) + " - " + mCrime.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + mCrime.getCalendar().get(Calendar.MINUTE));
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
 
