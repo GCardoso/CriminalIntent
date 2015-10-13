@@ -19,6 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -177,8 +178,13 @@ public class CrimeFragment extends Fragment{
     }
 
     private void updateTime() {
+        if (mCrime.getCalendar() == null){
+            mCrime.setCalendar(Calendar.getInstance());
+        }
         int hour = mCrime.getCalendar().get(Calendar.HOUR_OF_DAY);
         int minute = mCrime.getCalendar().get(Calendar.MINUTE);
-        mTimeButton.setText(hour + ":" + minute);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        mTimeButton.setText(sdf.format(mCrime.getCalendar().getTime()));
+
     }
 }

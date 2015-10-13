@@ -14,11 +14,14 @@ public class Crime {
     private Calendar mCalendar;
     private boolean mSolved;
 
-    public Crime(){
-        //Generate unique identifier
-        mId = UUID.randomUUID();
+    public Crime(UUID id){
+        mId = id;
         mDate = new Date();
         mCalendar = Calendar.getInstance();
+    }
+
+    public Crime(){
+        this(UUID.randomUUID());
     }
 
     public boolean isSolved() {

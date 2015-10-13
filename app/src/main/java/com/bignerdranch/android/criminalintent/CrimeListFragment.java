@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -47,7 +47,9 @@ public void onCreate(Bundle savedInstanceState){
             mTitleTextView.setText(mCrime.getTitle());
 
             android.text.format.DateFormat dateFormater = new android.text.format.DateFormat();
-            mDateTextView.setText(dateFormater.format("EEEE, MMM dd, yyyy ", mCrime.getDate()) + " - " + mCrime.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + mCrime.getCalendar().get(Calendar.MINUTE));
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE (MMM/dd) - HH:mm");
+            //dateFormater.format("EEEE, MMM dd, yyyy ", mCrime.getDate()) + " - " + mCrime.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + mCrime.getCalendar().get(Calendar.MINUTE)
+            mDateTextView.setText(sdf.format(mCrime.getCalendar().getTime()));
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
 
@@ -72,22 +74,10 @@ public void onCreate(Bundle savedInstanceState){
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>{
         private List<Crime> mCrimes;
-        private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0;
-        private static final int VIEW_TYPE_OBJECT_VIEW = 1;
-
 
         public CrimeAdapter(List<Crime> crimes){
             mCrimes = crimes;
         }
-
-//        @Override
-//        public int getItemViewType(int position) {
-//            if (mCrimes.isEmpty()) {
-//                return VIEW_TYPE_EMPTY_LIST_PLACEHOLDER;
-//            } else {
-//                return VIEW_TYPE_OBJECT_VIEW;
-//            }
-//        }
 
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -99,17 +89,6 @@ public void onCreate(Bundle savedInstanceState){
             }else{
                 view = layoutInflater.inflate(R.layout.list_item_crime,parent, false );
             }
-
-//            switch (viewType){
-//                case VIEW_TYPE_EMPTY_LIST_PLACEHOLDER:
-//                    view = layoutInflater.inflate(R.layout.empty_view,parent, false );
-//                    break;
-//                case VIEW_TYPE_OBJECT_VIEW:
-//                    view = layoutInflater.inflate(R.layout.list_item_crime,parent, false );
-//                    break;
-//            }
-
-
 
             return new CrimeHolder(view);
         }
@@ -124,6 +103,10 @@ public void onCreate(Bundle savedInstanceState){
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes){
+            mCrimes = crimes;
         }
     }
 
@@ -212,6 +195,7 @@ public void onCreate(Bundle savedInstanceState){
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }else{
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyItemChanged(lastClicked);
         }
 
