@@ -48,8 +48,7 @@ public void onCreate(Bundle savedInstanceState){
 
             android.text.format.DateFormat dateFormater = new android.text.format.DateFormat();
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE (MMM/dd) - HH:mm");
-            //dateFormater.format("EEEE, MMM dd, yyyy ", mCrime.getDate()) + " - " + mCrime.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + mCrime.getCalendar().get(Calendar.MINUTE)
-            mDateTextView.setText(sdf.format(mCrime.getCalendar().getTime()));
+            mDateTextView.setText(sdf.format(mCrime.getDate().getTime()));
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
 

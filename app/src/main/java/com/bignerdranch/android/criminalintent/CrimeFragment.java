@@ -74,6 +74,9 @@ public class CrimeFragment extends Fragment{
         if (requestCode == REQUEST_TIME){
             Calendar calendar = (Calendar) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             mCrime.setCalendar(calendar);
+            Date updatedDate = mCrime.getDate();
+            updatedDate.setTime(calendar.getTimeInMillis());
+            mCrime.setDate(updatedDate);
 
             updateTime();
         }
@@ -178,9 +181,9 @@ public class CrimeFragment extends Fragment{
     }
 
     private void updateTime() {
-        if (mCrime.getCalendar() == null){
-            mCrime.setCalendar(Calendar.getInstance());
-        }
+//        if (mCrime.getCalendar() == null){
+//            mCrime.setCalendar(Calendar.getInstance());
+//        }
         int hour = mCrime.getCalendar().get(Calendar.HOUR_OF_DAY);
         int minute = mCrime.getCalendar().get(Calendar.MINUTE);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
